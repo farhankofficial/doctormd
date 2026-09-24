@@ -7,6 +7,60 @@
 <meta name="theme-color" content="#071f35">
 <title>DoctorMD — Dr. Muhammad Dawood, MBBS</title>
 <style>
+/* DoctorMD live app/web splash */
+body.splash-active{overflow:hidden}
+#doctorSplash{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#f7fbff;
+  display:grid;
+  place-items:center;
+  opacity:1;
+  visibility:visible;
+  transition:opacity .55s ease, visibility .55s ease;
+}
+#doctorSplash.hide{opacity:0;visibility:hidden;pointer-events:none}
+#doctorSplash .splash-art{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+#doctorSplash .live-loader{
+  position:absolute;
+  left:50%;
+  top:84.4%;
+  width:54px;
+  height:54px;
+  margin-left:-27px;
+  margin-top:-27px;
+  border:7px solid rgba(16,168,160,.18);
+  border-top-color:#10a8a0;
+  border-right-color:#078fcb;
+  border-radius:50%;
+  animation:doctorSpin .9s linear infinite;
+}
+@keyframes doctorSpin{to{transform:rotate(360deg)}}
+#doctorSplash .loading-status{
+  position:absolute;
+  left:50%;
+  top:89.2%;
+  transform:translateX(-50%);
+  color:#52718a;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+@media(max-width:600px){
+  #doctorSplash .live-loader{
+    width:46px;height:46px;margin-left:-23px;margin-top:-23px;
+    top:84.1%;border-width:6px;
+  }
+  #doctorSplash .loading-status{top:89%;font-size:13px}
+}
+
 :root{
   --navy:#071f35;
   --navy2:#0b3148;
@@ -187,7 +241,15 @@ details p{color:var(--muted);font-size:.84rem;padding:9px 20px 0 0}
 }
 </style>
 </head>
-<body>
+<body class="splash-active">
+
+<!-- Real-time DoctorMD splash screen -->
+<div id="doctorSplash" role="status" aria-label="Loading DoctorMD">
+  <img class="splash-art" src="DoctorMD_Splash_Screen.png" alt="DoctorMD loading screen">
+  <div class="live-loader" aria-hidden="true"></div>
+  <div class="loading-status" id="loadingStatus">Loading DoctorMD…</div>
+</div>
+
 
 <header class="header">
 <div class="container nav">
@@ -364,5 +426,42 @@ document.getElementById('bookingForm').addEventListener('submit',e=>{
  window.open('https://wa.me/923038632790?text='+msg,'_blank','noopener');
 });
 </script>
+
+<script>
+/* Keep the splash visible long enough to be seen, but never longer than necessary. */
+(function(){
+  const splash = document.getElementById('doctorSplash');
+  const status = document.getElementById('loadingStatus');
+  const splashStart = performance.now();
+  const minimumDisplay = 1600;
+
+  function finishSplash(){
+    const elapsed = performance.now() - splashStart;
+    const wait = Math.max(0, minimumDisplay - elapsed);
+    setTimeout(function(){
+      splash.classList.add('hide');
+      document.body.classList.remove('splash-active');
+      setTimeout(function(){ splash.remove(); }, 600);
+    }, wait);
+  }
+
+  function appReady(){
+    if(status) status.textContent = 'Ready';
+    finishSplash();
+  }
+
+  if(document.readyState === 'complete'){
+    appReady();
+  }else{
+    window.addEventListener('load', appReady, {once:true});
+  }
+
+  /* Safety fallback for slow/offline image loads. */
+  setTimeout(function(){
+    if(!splash.classList.contains('hide')) appReady();
+  }, 7000);
+})();
+</script>
+
 </body>
 </html>
