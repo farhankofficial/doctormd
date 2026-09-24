@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210">
+<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b3150"/><stop offset=".58" stop-color="#087f96"/><stop offset="1" stop-color="#12b6aa"/></linearGradient></defs>
+<rect width="720" height="210" rx="36" fill="#fff"/>
+<g transform="translate(28 24)"><path d="M78 4c46 0 83 37 83 83s-37 83-83 83H8V4h70Z" fill="none" stroke="url(#g)" stroke-width="19"/><rect x="54" y="42" width="48" height="92" rx="8" fill="#10a9a0"/><rect x="32" y="64" width="92" height="48" rx="8" fill="#10a9a0"/><path d="M23 113c-16 5-22 17-22 31 0 17 12 29 28 29 16 0 29-12 29-28v-14" fill="none" stroke="#0b3150" stroke-width="8" stroke-linecap="round"/><circle cx="58" cy="127" r="7" fill="#0b3150"/><path d="M93 129c8 18 24 28 43 28" fill="none" stroke="#0b3150" stroke-width="8" stroke-linecap="round"/><circle cx="141" cy="157" r="14" fill="none" stroke="#0b3150" stroke-width="8"/></g>
+<text x="212" y="112" font-family="Arial,Helvetica,sans-serif" font-size="73" font-weight="800" fill="#0b2742">Doctor</text><text x="442" y="112" font-family="Arial,Helvetica,sans-serif" font-size="73" font-weight="800" fill="#0aa59f">MD</text><text x="214" y="155" font-family="Arial,Helvetica,sans-serif" font-size="19" letter-spacing="6" font-weight="700" fill="#597086">YOUR HEALTH • OUR PRIORITY</text>
+</svg>
